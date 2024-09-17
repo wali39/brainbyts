@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model User{
+    id          String @id @default(auto()) @map("_id") @db.ObjectId
+    name        String?
+    email       String @unique
+    password    String 
+    role        String @default("user")
+    profile     Profile?
+    blogs       Blog[]
+    comments    Comment[]
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Profile{
+    id            String @id @default(auto()) @map("_id") @db.ObjectId
+    bio           String?
+    imageUrl      String?
+    publicId      String?
+    userId        String @unique @db.ObjectId
+    user          User @relation(fields: [userId],references: [id])
+}
+
+
+model Blog{
+    id          String @id @default(auto()) @map("_id") @db.ObjectId
+    title       String
+    descritpion String?
+    imageId   String? @db.ObjectId @unique
+    Image     Image?
+    authorId     String @db.ObjectId
+    author      User @relation(fields: [authorId],references: [id])
+    categoryId  String? @db.ObjectId
+    category    Category? @relation(fields: [categoryId],references: [id],onDelete: Cascade)
+    comments    Comment[]
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Image {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  publicId  String
+  imageUrl  String
+  profileId String? @db.ObjectId @unique
+  blogId    String @db.ObjectId @unique
+  blog        Blog @relation(fields: [blogId],references: [id],onDelete: Cascade)
+}
+
+
+
+model Category{
+    id         String @id @default(auto()) @map("_id") @db.ObjectId
+    name       String
+    blogs      Blog[]
+}
+
+model Comment{
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  content      String
+  authorId     String @db.ObjectId
+  author       User @relation(fields: [authorId],references: [id])
+  blogId       String @db.ObjectId
+  blog         Blog @relation(fields: [blogId],references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+

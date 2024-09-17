@@ -1,12 +1,12 @@
 import AuthorCard from "@/components/author-card";
-import author from "../../public/author.jpeg";
+import author from "@/public/author.jpeg";
 import Heading from "@/components/heading";
 import BlogCard from "@/components/blog-card";
 import { blogs } from "@/components/blog-seeds";
 
-export default function About() {
+export default function AuthorPage() {
   return (
-    <div className="mt-[100px]  ">
+    <div className=" mt-[150px]">
       <AuthorCard
         IsauthorPage={true}
         publishedPosts={4}
@@ -18,7 +18,7 @@ export default function About() {
       <div className="text-center">
         <Heading title="All posts by author" />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-2  space-x-2">
+      <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-2  gap-10">
         {blogs.map((blog) => (
           <BlogCard
             key=""

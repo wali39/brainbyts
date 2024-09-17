@@ -16,7 +16,7 @@ const BlogCard = ({ blogImg, category, title, description }: BlogCardProps) => {
             {category}
           </p>
 
-          <div className="text-background  top-0 -left-[0.75rem]  rotate-90 md:left-[0.05rem] absolute">
+          <div className="text-background border-0  top-0 -left-[0.005rem] sm:-left-[0.75rem]  rotate-90 md:left-[0.05rem] absolute">
             <svg
               className="absolute h-[0.75rem] w-[0.75rem] block align-middle"
               width="101"
@@ -33,7 +33,7 @@ const BlogCard = ({ blogImg, category, title, description }: BlogCardProps) => {
               ></path>
             </svg>
           </div>
-          <div className="text-background  bottom-0   rotate-90 md:-right-[0.05rem] absolute">
+          <div className="text-background  bottom-0 -right-[0.005rem]  rotate-90 md:-right-[0.005rem] absolute">
             <svg
               className="absolute h-[0.75rem] w-[0.75rem] block align-middle"
               width="101"

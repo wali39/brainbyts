@@ -12,7 +12,8 @@ body,
   background-color: white !important;
 }
 .ant-menu-item-selected {
-  background-color: #c8323c !important;
+  color: black !important;
+  background-color: #c8323c23 !important;
 }
 .icon_button {
   background-color: #faf4f4 !important;
@@ -33,7 +34,7 @@ body,
 .hero::before {
   content: "“";
   /* color: #ef8677; */
-  color: #6EC58B;
+  color: #6ec58b;
   font-family: Helvetica, sans-serif;
   font-size: 100px;
   line-height: 0;
@@ -45,7 +46,11 @@ body,
   position: relative;
 
 } */
-
+.ql-editor {
+  height: 500px !important;
+  max-height: 250px;
+  overflow: auto;
+}
 @layer base {
   :root {
     --background: 0, 37%, 97%;
@@ -68,6 +73,7 @@ body,
 
     --accent: 140, 43%, 60%;
     --accent-foreground: 222.2 47.4% 11.2%;
+    --card-bg: 76, 24%, 91%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;

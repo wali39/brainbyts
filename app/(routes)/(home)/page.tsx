@@ -7,14 +7,15 @@ import Blog from "@/components/blog";
 import blogImage from "/public/blogimage.jpg";
 import blogImage2 from "/public/blog2.jpg";
 import { blogs } from "@/components/blog-seeds";
-export default function App() {
+
+export default function HomePage() {
   return (
-    <>
+    <div>
       <Hero />
       <div className="text-center">
-        <Heading title="Blogs" />
+        <Heading title="Recent posts" />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-2  space-x-2">
+      <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-2  gap-x-10">
         {blogs.map((blog) => (
           <BlogCard
             key=""
@@ -25,6 +26,6 @@ export default function App() {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }

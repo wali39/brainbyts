@@ -22,6 +22,9 @@ const config: Config = {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        cardBg: {
+          DEFAULT: "hsl(var(--card-bg))",
+        },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -31,5 +34,6 @@ const config: Config = {
     },
   },
   plugins: [],
+  important: true,
 };
 export default config;
