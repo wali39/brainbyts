@@ -75,16 +75,14 @@ const UserMenu = ({
             <Link
               className="flex gap-x-2 items-center text-accent"
               href={`/auth/${id}/profile`}
+              shallow
             >
               <EditOutlined size={18} /> Update profile
             </Link>
             <span onClick={() => handleUser()}>
-              <Link
-                className="flex gap-x-2 items-center text-primary"
-                href="/auth/sign-in"
-              >
+              <p className="flex gap-x-2 items-center text-primary">
                 <RiLogoutCircleRLine size={18} /> Logout
-              </Link>
+              </p>
             </span>
           </div>
         </div>
