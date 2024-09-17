@@ -13,11 +13,32 @@ import {
 } from "@ant-design/icons";
 
 import MobileMenu from "./mobile-menu";
+import { motion } from "framer-motion";
 import UserMenu from "./user-menu";
 
 import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
+const navbarLinks = [
+  {
+    href: "/",
+    name: "Home",
+  },
+  {
+    href: "/blogs",
+    name: "Blogs",
+  },
+  {
+    href: "/about",
+    name: "About",
+  },
+  {
+    href: "/contact",
+    name: "Contact",
+  },
+];
 
 const Navbar = () => {
+  const pathName = usePathname();
   const [mobileMenu, setMobileMenu] = useState(true);
   const [displayMode, setDisplayMode] = useState("light");
 
@@ -43,18 +64,33 @@ const Navbar = () => {
         </Button>
 
         <div className="hidden  md:flex md:space-x-5 lg:space-x-8  items-center font-medium">
-          <Link href="/" className="hover:text-red-300">
-            Home
-          </Link>
-          <Link href="/blogs" className="hover:text-red-300">
-            Blog
-          </Link>
-          <Link href="/about" className="hover:text-red-300">
-            About
-          </Link>
-          <Link href="/contact" className="hover:text-red-300">
-            Contact
-          </Link>
+          {navbarLinks.map((navLink, key) => (
+            <Link
+              key={key}
+              href={navLink.href}
+              className={`relative${
+                pathName === navLink.href ? "  text-primary" : ""
+              }`}
+            >
+              {/* <span
+                className={`${
+                  pathName === navLink.href &&
+                  "bg-primary w-[95%] h-[3px] rounded-full absolute -bottom-[2px]"
+                }`}
+              /> */}
+              <div>
+                {navLink.name}
+
+                {pathName === navLink.href ? (
+                  <motion.div
+                    className="bg-primary w-[95%] h-[3px] rounded-full absolute -bottom-[2px] "
+                    layoutId="underline"
+                  />
+                ) : null}
+              </div>
+            </Link>
+          ))}
+
           <div className=" flex items-center md:space-x-2 lg:space-x-10">
             <Input placeholder="search..." prefix={<SearchOutlined />} />
             <UserMenu {...session?.user} />
