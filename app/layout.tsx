@@ -3,12 +3,10 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import { Toaster } from "react-hot-toast";
-// import { SessionProvider } from "next-auth/react";
-import SessionProvider from "../provider/session-provider";
 import { getServerSession } from "next-auth";
 import Provider from "@/context/provider";
-import { getSession } from "next-auth/react";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import PageTransitionEffect from "./PageTransitionEffect";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -34,7 +32,7 @@ export default async function RootLayout({
         <Provider session={session}>
           <AntdRegistry>
             <Navbar />
-            {children}
+            <PageTransitionEffect> {children}</PageTransitionEffect>
             <Toaster />
           </AntdRegistry>
         </Provider>
