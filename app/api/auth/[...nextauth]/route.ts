@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { compare } from "bcrypt";
 const cloudinary = require("cloudinary").v2;
 
-export const handler = NextAuth({
+const handler = NextAuth({
   session: { strategy: "jwt" },
   pages: {
     signIn: "/auth/sign-in",
