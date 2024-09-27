@@ -11,7 +11,6 @@ import { BiEdit, BiTrash } from "react-icons/bi";
 import { MdCloudUpload } from "react-icons/md";
 import { RiImageLine } from "react-icons/ri";
 import { FaImages, FaRegImage } from "react-icons/fa";
-// import FormHeading from "@/components/form-heading";
 
 interface BlogImageFormProps {
   imageUrl?: string;
@@ -52,7 +51,6 @@ const BlogImageForm = ({ imageUrl, authorId, blogId }: BlogImageFormProps) => {
   };
   return (
     <div>
-      {/* <FormHeading title="Add blog Image" icon={FaRegImage} /> */}
       <div className=" border-2 shadow-sm p-5 rounded-md bg-[#EBEEE3]">
         <div className="flex justify-between mb-2 align-middle">
           <h4 className="md:text-lg font-medium flex items-center gap-x-1">

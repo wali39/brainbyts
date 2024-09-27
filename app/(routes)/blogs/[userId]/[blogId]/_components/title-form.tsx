@@ -8,7 +8,6 @@ import { Alert, Button, Form, Input, Tooltip } from "antd";
 
 import { BiEdit } from "react-icons/bi";
 import { MdTitle } from "react-icons/md";
-import FormHeading from "@/components/form-heading";
 import toast from "react-hot-toast";
 
 interface TitleFormProps {
@@ -47,7 +46,6 @@ const TitleForm = ({ title, authorId, blogId }: TitleFormProps) => {
 
   return (
     <div>
-      {/* <FormHeading title="Title" icon={MdTitle} /> */}
 
       <div className="col-span-8 border-2 shadow-sm p-5  lg:h-40 items-center  rounded-md bg-[#EBEEE3]">
         <div className="flex justify-between mb-2">

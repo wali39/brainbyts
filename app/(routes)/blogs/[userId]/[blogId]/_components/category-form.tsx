@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { Button, Form, Select, Tooltip } from "antd";
 import { BiCategory, BiEdit } from "react-icons/bi";
 import { TbCategoryPlus } from "react-icons/tb";
-import FormHeading from "@/components/form-heading";
 import toast from "react-hot-toast";
 
 interface CategoryFormProps {
@@ -58,8 +57,6 @@ const CategoryForm = ({
   };
   return (
     <div>
-      {/* <FormHeading title="Add blog Image" icon={TbCategoryPlus} /> */}
-
       <div className=" col-span-4 border-2 shadow-sm p-5 lg:h-[9.5rem] rounded-md bg-[#EBEEE3]">
         <div className="flex justify-between mb-2">
           <h4 className="md:text-lg font-medium flex items-center gap-x-1">
