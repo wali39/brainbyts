@@ -1,11 +1,13 @@
 "use client";
 import { useState } from "react";
-import { Button, Form, Input } from "antd";
-import { BiEdit } from "react-icons/bi";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+
+import { Button, Form, Input } from "antd";
+
+import { BiEdit } from "react-icons/bi";
+import { FaRegUser } from "react-icons/fa";
 
 interface NameformProps {
   name?: string | null;
@@ -37,26 +39,14 @@ const NameForm = ({ name }: NameformProps) => {
       setIsSubmitting(false);
       setIsEditing(false);
     }
-    // try {
-    //   setIsSubmitting(true);
-    //   await axios
-    //     .patch(`/api/user/${session?.user?.id}`, formData)
-    //     .then((res) => console.log("email update response", res));
-
-    //   router.refresh();
-    // } catch (error) {
-    //   console.log(error);
-    // } finally {
-    //   setIsSubmitting(false);
-    //   setIsEditing(false);
-    // }
-    console.log("Success:", formData);
   };
 
   return (
     <div className="border-2 shadow-sm p-5 rounded-md bg-[#EBEEE3]">
       <div className="flex justify-between mb-2">
-        <h4 className="md:text-lg font-medium">Name</h4>
+        <h4 className="md:text-lg font-medium flex gap-1 items-center">
+          <FaRegUser size={16} /> Name
+        </h4>
         <h4
           className="md:text-lg w-5 h-5 cursor-pointer"
           onClick={() => handleEdit()}

@@ -1,12 +1,16 @@
 "use client";
 import { useState } from "react";
-import { Button, Form, Input } from "antd";
-import { BiEdit } from "react-icons/bi";
-import TextArea from "antd/es/input/TextArea";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+
+import { Button, Form } from "antd";
+import TextArea from "antd/es/input/TextArea";
+
+import { BiEdit } from "react-icons/bi";
+import { CgDetailsLess, CgDetailsMore } from "react-icons/cg";
+import { TbListDetails } from "react-icons/tb";
+import { RiProfileLine } from "react-icons/ri";
 
 const BioForm = ({ bio }: { bio?: string | null }) => {
   const router = useRouter();
@@ -35,13 +39,15 @@ const BioForm = ({ bio }: { bio?: string | null }) => {
       setIsSubmitting(false);
       setIsEditing(false);
     }
-    console.log("Success:", formData);
   };
 
   return (
     <div className="border-2 shadow-sm p-5 rounded-md bg-[#EBEEE3]">
       <div className="flex justify-between mb-2">
-        <h4 className="md:text-lg font-medium">Bio</h4>
+        <h4 className="md:text-lg font-medium flex items-center gap-x-1">
+          <RiProfileLine />
+          Bio
+        </h4>
         <h4
           className="md:text-lg w-5 h-5 cursor-pointer"
           onClick={() => handleEdit()}
