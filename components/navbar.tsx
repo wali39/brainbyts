@@ -1,9 +1,15 @@
 "use client";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
-import { Input, Button } from "antd";
+import MobileMenu from "./mobile-menu";
+import UserMenu from "./user-menu";
+
+import { Button } from "antd";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -11,33 +17,43 @@ import {
   SearchOutlined,
   MoonOutlined,
 } from "@ant-design/icons";
-
-import MobileMenu from "./mobile-menu";
-import { motion } from "framer-motion";
-import UserMenu from "./user-menu";
-
-import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
-const navbarLinks = [
-  {
-    href: "/",
-    name: "Home",
-  },
-  {
-    href: "/blogs",
-    name: "Blogs",
-  },
-  {
-    href: "/about",
-    name: "About",
-  },
-  {
-    href: "/contact",
-    name: "Contact",
-  },
-];
+import Search from "./search";
 
 const Navbar = () => {
+  const { data: session } = useSession();
+  let navbarLinks = [
+    {
+      href: "/",
+      name: "Home",
+    },
+    {
+      href: "/blogs",
+      name: "Blogs",
+    },
+
+    {
+      href: "/contact",
+      name: "Contact",
+    },
+  ];
+  {
+    session &&
+      session?.user.role &&
+      session.user.role == "admin" &&
+      navbarLinks.push({
+        href: `/blogs/category/create/${session.user.id}`,
+        name: "category",
+      });
+  }
+  {
+    session &&
+      session?.user.role &&
+      session.user.role == "admin" &&
+      navbarLinks.push({
+        href: `/blogs/${session.user.id}/create/`,
+        name: "blog",
+      });
+  }
   const pathName = usePathname();
   const [mobileMenu, setMobileMenu] = useState(true);
   const [displayMode, setDisplayMode] = useState("light");
@@ -48,13 +64,17 @@ const Navbar = () => {
   const toggleMode = () => {
     displayMode === "light" ? setDisplayMode("dark") : setDisplayMode("light");
   };
-  const { data: session } = useSession();
-  console.log("session", session);
 
   return (
     <div className="p-5 pb-0 mb-0 text-black ">
       <div className=" flex justify-between  items-center ">
-        <Image src="/logo.png" height="30" width="150" alt="" />
+        <Image
+          src="/logo.png"
+          height="30"
+          width="150"
+          alt="Brainbyts"
+          priority
+        />
 
         <Button
           className="bg-primary text-white text-[18px] md:hidden  "
@@ -68,6 +88,7 @@ const Navbar = () => {
             <Link
               key={key}
               href={navLink.href}
+              prefetch={true}
               className={`relative${
                 pathName === navLink.href ? "  text-primary" : ""
               }`}
@@ -92,7 +113,7 @@ const Navbar = () => {
           ))}
 
           <div className=" flex items-center md:space-x-2 lg:space-x-10">
-            <Input placeholder="search..." prefix={<SearchOutlined />} />
+            <Search />
             <UserMenu {...session?.user} />
             <Button shape="circle" className="icon_button" onClick={toggleMode}>
               {displayMode == "light" ? <MoonOutlined /> : <SunOutlined />}

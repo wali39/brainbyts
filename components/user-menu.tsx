@@ -1,15 +1,16 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
+import Image from "next/image";
 
-import { UserOutlined, EditOutlined } from "@ant-design/icons";
 import { Dropdown, type MenuProps } from "antd";
-import { MdOutlineEmail } from "react-icons/md";
+
 import { RiLoginCircleLine, RiLogoutCircleRLine } from "react-icons/ri";
+import { UserOutlined, EditOutlined } from "@ant-design/icons";
+import { MdOutlineEmail } from "react-icons/md";
 import { HiOutlineUserAdd } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
-import Image from "next/image";
-import { signOut } from "next-auth/react";
 
 interface UserMenuProps {
   name?: string | null;
@@ -31,7 +32,6 @@ const UserMenu = ({
       redirect: false,
       callbackUrl: "/auth/sign-in",
     });
-    console.log("user-menu logout", res);
     router.push(res.url);
     router.refresh();
   };
