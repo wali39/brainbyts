@@ -6,7 +6,6 @@ import { Toaster } from "react-hot-toast";
 import { getServerSession } from "next-auth";
 import Provider from "@/context/provider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import PageTransitionEffect from "./PageTransitionEffect";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -28,9 +27,7 @@ export default async function RootLayout({
       <body
         className={`${roboto.className}   mx-auto absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_2px)] [background-size:16px_16px] max-w-screen-lg bg-fixed `}
       >
-        {/* <div className=" mx-auto"> */}
         {children}
-        {/* </div> */}
       </body>
     </html>
   );
