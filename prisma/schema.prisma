@@ -40,9 +40,9 @@ model Profile{
 model Blog{
     id          String @id @default(auto()) @map("_id") @db.ObjectId
     title       String
-    descritpion String?
-    imageId   String? @db.ObjectId @unique
+    description String?
     Image     Image?
+    isPublished Boolean @default(false)
     authorId     String @db.ObjectId
     author      User @relation(fields: [authorId],references: [id])
     categoryId  String? @db.ObjectId
@@ -56,9 +56,8 @@ model Image {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   publicId  String
   imageUrl  String
-  profileId String? @db.ObjectId @unique
   blogId    String @db.ObjectId @unique
-  blog        Blog @relation(fields: [blogId],references: [id],onDelete: Cascade)
+  blog        Blog @relation(fields: [blogId],references: [id],onDelete:Cascade)
 }
 
 
@@ -75,7 +74,7 @@ model Comment{
   authorId     String @db.ObjectId
   author       User @relation(fields: [authorId],references: [id])
   blogId       String @db.ObjectId
-  blog         Blog @relation(fields: [blogId],references: [id])
+  blog         Blog @relation(fields: [blogId],references: [id],onDelete:Cascade)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
