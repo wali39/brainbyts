@@ -70,7 +70,10 @@ export async function DELETE(
         authorId: userId,
       },
     });
-    return NextResponse.json({ success: "Blog deleted!" }, { status: 200 });
+    return NextResponse.json(
+      { success: "Blog deleted successfully!" },
+      { status: 200 }
+    );
   } catch (error) {
     console.log("DELETE_BLOG", error);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
@@ -83,71 +86,68 @@ export async function PATCH(
   try {
     const { imageUrl, publicId, ...values } = await req.json();
 
-    console.log("params", params);
-    console.log("blog patch", values.title);
-    return NextResponse.json(values);
+    const blogByUser = await db.blog.findFirst({
+      where: {
+        id: params.blogId,
+        authorId: params.userId,
+      },
+    });
+    if (!blogByUser)
+      return NextResponse.json(
+        { error: "No blog found by user!" },
+        { status: 401 }
+      );
 
-    // const blogByUser = await db.blog.findFirst({
-    //   where: {
-    //     id: params.blogId,
-    //     authorId: params.userId,
-    //   },
-    // });
-    // if (!blogByUser)
-    //   return NextResponse.json(
-    //     { error: "No blog found by user!" },
-    //     { status: 401 }
-    //   );
+    const updatedBlog = await db.blog.update({
+      where: {
+        id: params.blogId,
+        authorId: params.userId,
+      },
+      data: {
+        ...values,
+      },
+    });
+    if (imageUrl && publicId) {
+      const imageByBlogId = await db.image.findFirst({
+        where: {
+          blogId: params.blogId,
+        },
+      });
 
-    // await db.blog.update({
-    //   where: {
-    //     id: params.blogId,
-    //     authorId: params.userId,
-    //   },
-    //   data: {
-    //     ...values,
-    //   },
-    // });
-    // if (imageUrl && publicId) {
-    //   const imageByBlogId = await db.image.findFirst({
-    //     where: {
-    //       blogId: params.blogId,
-    //     },
-    //   });
-
-    //   imageByBlogId &&
-    //     (await db.blog.update({
-    //       where: {
-    //         id: params.blogId,
-    //         authorId: params.userId,
-    //       },
-    //       data: {
-    //         Image: {
-    //           update: {
-    //             data: {
-    //               publicId,
-    //               imageUrl,
-    //             },
-    //           },
-    //         },
-    //       },
-    //     }));
-    //   !imageByBlogId &&
-    //     (await db.blog.update({
-    //       where: {
-    //         authorId: params.userId,
-    //         id: params.blogId,
-    //       },
-    //       data: {
-    //         Image: {
-    //           create: {
-    //             publicId,
-    //             imageUrl,
-    //           },
-    //         },
-    //       },
-    //     }));
-    // }
+      imageByBlogId &&
+        (await db.blog.update({
+          where: {
+            id: params.blogId,
+            authorId: params.userId,
+          },
+          data: {
+            Image: {
+              update: {
+                data: {
+                  publicId,
+                  imageUrl,
+                },
+              },
+            },
+          },
+        }));
+      !imageByBlogId &&
+        (await db.blog.update({
+          where: {
+            authorId: params.userId,
+            id: params.blogId,
+          },
+          data: {
+            Image: {
+              create: {
+                publicId,
+                imageUrl,
+              },
+            },
+          },
+        }));
+    }
+    return NextResponse.json(updatedBlog, { status: 200 });
   } catch (error) {
     console.log("[CREATE_BLOG]", error);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
