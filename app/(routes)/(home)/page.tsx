@@ -1,29 +1,22 @@
-import Navbar from "@/components/navbar";
-import Image from "next/image";
-import Hero from "./components/hero";
+import Hero from "./_components/hero";
 import Heading from "@/components/heading";
 import BlogCard from "@/components/blog-card";
-import Blog from "@/components/blog";
-import blogImage from "/public/blogimage.jpg";
-import blogImage2 from "/public/blog2.jpg";
-import { blogs } from "@/components/blog-seeds";
+// import { blogs } from "@/components/blog-seeds";
+import LoadingTest from "./_components/loading-test";
+import getBlogs from "@/actions/get-blogs";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const blogs = await getBlogs({});
   return (
     <div>
       <Hero />
+      {/* <LoadingTest /> */}
       <div className="text-center">
         <Heading title="Recent posts" />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-2  gap-x-10">
         {blogs.map((blog) => (
-          <BlogCard
-            key=""
-            blogImg={blog.blogImg}
-            title={blog.title}
-            description={blog.description}
-            category={blog.category}
-          />
+          <BlogCard key={blog.id} blogData={blog} />
         ))}
       </div>
     </div>
