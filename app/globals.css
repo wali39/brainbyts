@@ -47,9 +47,19 @@ body,
 
 } */
 .ql-editor {
-  height: 500px !important;
-  max-height: 250px;
-  overflow: auto;
+  /* height: 500px !important; */
+  min-height: 250px;
+  /* overflow: auto; */
+  /* display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Limit to 3 lines */
+  /* overflow: hidden !important; */
+}
+.ql-font-roboto {
+  font-family: "Roboto", sans-serif;
+}
+.ant-spin-dot-item {
+  background-color: #c8323c !important;
 }
 @layer base {
   :root {

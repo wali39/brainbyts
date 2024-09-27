@@ -23,19 +23,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession();
   return (
     <html lang="en">
       <body
-        className={`${roboto.className}  bg-background max-w-screen-lg mx-auto `}
+        className={`${roboto.className}   mx-auto absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_2px)] [background-size:16px_16px] max-w-screen-lg bg-fixed `}
       >
-        <Provider session={session}>
-          <AntdRegistry>
-            <Navbar />
-            <PageTransitionEffect> {children}</PageTransitionEffect>
-            <Toaster />
-          </AntdRegistry>
-        </Provider>
+        {/* <div className=" mx-auto"> */}
+        {children}
+        {/* </div> */}
       </body>
     </html>
   );
