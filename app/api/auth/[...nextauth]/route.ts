@@ -29,18 +29,18 @@ const handler = NextAuth({
             profile: true,
           },
         });
-        // console.log("user", user);
+        console.log("user", user);
         if (user) {
           const IsPassMatch = await compare(password, user.password);
-
+          console.log("ispatch match", IsPassMatch);
           if (IsPassMatch) {
             // return user;
             return {
               id: user.id,
               name: user.name,
               email: user.email,
+              role: user.role,
               imageUrl: user.profile?.imageUrl,
-              publicId: user.profile?.publicId,
             };
             // return NextResponse.json({ user: IsUser }, { status: 200 });
           }
@@ -155,28 +155,27 @@ const handler = NextAuth({
           console.log([{ error: "Internal error" }, { status: 500 }]);
         }
       }
-      console.log("jwt session: ", { token, user, session });
+      // console.log("jwt session: ", { token, user, session });
       if (user) {
         return {
           ...token,
           id: user.id,
+          role: user.role,
           imageUrl: user.imageUrl,
-          publicId: user.publicId,
         };
       }
-
       return token;
     },
     session: async ({ token, user, session }) => {
-      console.log("session direct", { session, token, user });
+      // console.log("session direct", { session, token, user });
       if (session.user) {
         return {
           ...session,
           user: {
             ...session.user,
             id: token.id,
+            role: token.role,
             imageUrl: token.imageUrl,
-            publicId: token.publicId,
           },
         };
       }
