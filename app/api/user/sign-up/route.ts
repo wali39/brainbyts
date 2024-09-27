@@ -1,26 +1,20 @@
 import { db } from "@/lib/db";
 import Password from "antd/es/input/Password";
+import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
-const bcrypt = require("bcrypt");
-
 
 export async function POST(req: Request) {
   try {
-    const { name, email, password } = await req.json();
+    const { name, email, password, role } = await req.json();
     // console.log("user data", body);
-    const saltRounds = 15;
 
-    const hashedPass = await bcrypt
-      .hash(password, saltRounds)
-      .then((hash: any) => {
-        return hash;
-      });
     const IsUserExist = await db.user.findFirst({
       where: {
         email,
       },
     });
 
+    const hashedPass = await hash(password, 15);
     if (!IsUserExist) {
       await db.user.create({
         data: {
