@@ -11,7 +11,7 @@ import { BiEdit, BiTrash } from "react-icons/bi";
 import { MdCloudUpload } from "react-icons/md";
 import { RiImageLine } from "react-icons/ri";
 import { FaImages, FaRegImage } from "react-icons/fa";
-import FormHeading from "@/components/form-heading";
+// import FormHeading from "@/components/form-heading";
 
 interface BlogImageFormProps {
   imageUrl?: string;
