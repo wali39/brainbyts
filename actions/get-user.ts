@@ -1,33 +1,8 @@
-import { db } from "@/lib/db";
+import axios from "axios";
 export const getUser = async (id: string) => {
   try {
-    const user = await db.user.findFirst({
-      where: {
-        id,
-      },
-      include: {
-        profile: true,
-      },
-    });
-    if (user) {
-      // console.log("getUser", user);
-      return {
-        name: user.name || "",
-        email: user.email,
-        role: user.role,
-        bio: user.profile?.bio || "",
-        imageUrl: user.profile?.imageUrl || "",
-        publicId: user.profile?.publicId || "",
-      };
-    }
-    return {
-      name: "",
-      email: "",
-      role: "",
-      bio: "",
-      imageUrl: "",
-      publicId: "",
-    };
+    const res = await axios.get(`${process.env.BASE_URL}/api/user/${id}`);
+    return res.data;
   } catch (error) {
     console.log("GET_USER", error);
     return {
