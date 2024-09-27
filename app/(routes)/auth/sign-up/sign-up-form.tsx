@@ -1,29 +1,20 @@
 "use client";
 import React, { useState } from "react";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { MdOutlineEmail } from "react-icons/md";
-import {
-  AutoComplete,
-  Button,
-  Cascader,
-  Checkbox,
-  Col,
-  Form,
-  Input,
-  InputNumber,
-  Row,
-  Select,
-} from "antd";
-import { FaRegCircleUser } from "react-icons/fa6";
 import Link from "next/link";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
+import { Button, Form, Input } from "antd";
+
+import { MdOutlineEmail } from "react-icons/md";
+import { FaRegCircleUser } from "react-icons/fa6";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+
 const SignUpForm = () => {
   const router = useRouter();
   const [form] = Form.useForm();
-  const [isSubmiting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onFinish = async (userInfo: any) => {
     try {
@@ -37,11 +28,10 @@ const SignUpForm = () => {
         toast.error(`${response?.data?.error}`);
       }
     } catch (error) {
-      console.log(error);
+      console.log("[SIGN-UP-FORM]", error);
     } finally {
       setIsSubmitting(false);
     }
-    console.log("Received values of form: ", userInfo);
   };
   return (
     <div className="col-start-2 col-span-10 md:col-start-4 md:col-span-6 rounded-xl shadow-xl p-5 md:p-[30px] border-2">
@@ -58,7 +48,7 @@ const SignUpForm = () => {
         name="register"
         onFinish={onFinish}
         // initialValues={{remember:true}}
-        disabled={isSubmiting}
+        disabled={isSubmitting}
         scrollToFirstError
         layout="vertical"
       >
@@ -121,7 +111,11 @@ const SignUpForm = () => {
           <Form.Item>
             <Button
               block
-              className="bg-accent text-white hover:text-black text-base"
+              className={`${
+                isSubmitting
+                  ? "bg-stone-200 text-stone-400 "
+                  : "bg-accent text-white"
+              }`}
               htmlType="submit"
             >
               Register

@@ -1,18 +1,19 @@
 "use client";
-import { LockOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Flex } from "antd";
-import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import toast from "react-hot-toast";
+
+import { signIn } from "next-auth/react";
+
+import { Button, Form, Input } from "antd";
+
 import { FaRegCircleUser } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
-import { signIn } from "next-auth/react";
+import { LockOutlined } from "@ant-design/icons";
 
 const SignInForm = () => {
   const router = useRouter();
-  const [isSubmiting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   interface Loginprops {
     email: String;
@@ -31,11 +32,10 @@ const SignInForm = () => {
         router.refresh();
       }
     } catch (error) {
-      console.log(error);
+      console.log("[SIGN-IN-FORM]", error);
     } finally {
       setIsSubmitting(false);
     }
-    console.log("Received values of form: ", loginInfo);
   };
 
   return (
@@ -47,7 +47,7 @@ const SignInForm = () => {
           SignIn
         </p>
       </div>
-      <Form name="login" onFinish={onFinish} disabled={isSubmiting}>
+      <Form name="login" onFinish={onFinish} disabled={isSubmitting}>
         <Form.Item
           name="email"
           // label="E-mail"
@@ -84,7 +84,11 @@ const SignInForm = () => {
         <Form.Item>
           <Button
             block
-            className="bg-accent text-white hover:text-black"
+            className={`${
+              isSubmitting
+                ? "bg-stone-200 text-stone-400 "
+                : "bg-accent text-white"
+            }`}
             htmlType="submit"
           >
             Sign in
