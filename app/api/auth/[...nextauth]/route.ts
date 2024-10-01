@@ -29,12 +29,9 @@ const handler = NextAuth({
             profile: true,
           },
         });
-        console.log("user", user);
         if (user) {
           const IsPassMatch = await compare(password, user.password);
-          console.log("ispatch match", IsPassMatch);
           if (IsPassMatch) {
-            // return user;
             return {
               id: user.id,
               name: user.name,
