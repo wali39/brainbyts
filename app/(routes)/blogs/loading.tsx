@@ -11,12 +11,12 @@ export default function Loading() {
         </div> */}
         <div className="space-y-10">
           <div className="grid grid-cols-2 gap-10">
-            <Skeleton className="aspect-[16/8] rounded-xl " />
-            <Skeleton className="aspect-[16/8] rounded-xl " />
+            <Skeleton className="aspect-[16/7] rounded-xl " />
+            <Skeleton className="aspect-[16/7] rounded-xl " />
           </div>
           <div className="grid grid-cols-2 gap-10">
-            <Skeleton className="aspect-[16/8] rounded-xl " />
-            <Skeleton className="aspect-[16/8] rounded-xl " />
+            <Skeleton className="aspect-[16/7] rounded-xl " />
+            <Skeleton className="aspect-[16/7] rounded-xl " />
           </div>
         </div>
       </div>
