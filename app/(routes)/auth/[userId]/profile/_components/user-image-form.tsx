@@ -2,13 +2,13 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { CldUploadWidget } from "next-cloudinary";
-import toast from "react-hot-toast";
 import Image from "next/image";
+
+import toast from "react-hot-toast";
+import { CldUploadWidget } from "next-cloudinary";
 
 import { Form } from "antd";
 
-import { SlPicture } from "react-icons/sl";
 import { BiEdit } from "react-icons/bi";
 import { FaRegImage } from "react-icons/fa";
 import { MdCloudUpload, MdOutlinePhotoSizeSelectActual } from "react-icons/md";
@@ -29,13 +29,6 @@ const UserImageForm = ({ imageUrl }: UserImageFormProps) => {
     setIsEditing((current) => !current);
   };
 
-  type formDatatype = {
-    userImgUrl: String;
-  };
-
-  const onFinish = (formData: formDatatype) => {
-  };
-
   const onUpload = async (results: any) => {
     try {
       const imageInfo = results.info.files[0].uploadInfo;
@@ -53,7 +46,7 @@ const UserImageForm = ({ imageUrl }: UserImageFormProps) => {
     }
   };
   return (
-    <div className="border-2 shadow-sm p-5 rounded-md bg-cardBg">
+    <div className="border-2 shadow-sm p-5 rounded-md bg-stone-50/50 backdrop-blur-sm border-stone-200/45">
       <div className="flex justify-between mb-2 align-middle">
         <h4 className="text-lg font-medium flex items-center gap-x-1">
           <MdOutlinePhotoSizeSelectActual />
@@ -91,7 +84,6 @@ const UserImageForm = ({ imageUrl }: UserImageFormProps) => {
         <Form
           name="userImgUrl"
           initialValues={{ remember: true }}
-          onFinish={onFinish}
           autoComplete="off"
         >
           <Form.Item

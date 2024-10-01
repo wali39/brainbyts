@@ -1,19 +1,19 @@
 "use client";
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
+
+import ConfirmModal from "./confirm-modal";
 
 import TextArea from "antd/es/input/TextArea";
-import { Button, Divider, Form, Tooltip } from "antd";
-import { PiArrowBendLeftUpBold, PiArrowBendLeftUpFill } from "react-icons/pi";
+import { Button, Form, Tooltip } from "antd";
 
-import { BiEdit, BiSolidUpArrow, BiTrash, BiUpArrow } from "react-icons/bi";
+import { PiArrowBendUpLeftBold } from "react-icons/pi";
+import { BiEdit, BiTrash } from "react-icons/bi";
 import { FaRegUser } from "react-icons/fa";
-import ConfirmModal from "./confirm-modal";
-import { useSession } from "next-auth/react";
-import { RiArrowGoForwardFill } from "react-icons/ri";
 
 interface CommentCardProps {
   commentData: {
@@ -31,15 +31,20 @@ interface CommentCardProps {
   blogId?: string;
 }
 const CommentCard = ({ commentData, blogId }: CommentCardProps) => {
-  const { data: session } = useSession();
-  const router = useRouter();
   const { author, content, createdAt, editingState = false } = commentData;
+
+  const router = useRouter();
+  const { data: session } = useSession();
+
   const [isEditing, setIsEditing] = useState(editingState);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [form] = Form.useForm();
+
   const handleEdit = () => {
     setIsEditing((current) => !current);
   };
+
   const onFinish = async (value: any) => {
     try {
       setIsSubmitting(true);
@@ -84,7 +89,7 @@ const CommentCard = ({ commentData, blogId }: CommentCardProps) => {
     }
   };
   return (
-    <div className="px-4  max-w-screen-sm md:max-w-screen-md lg:max-w-screen-md mt-10">
+    <div className="px-4  max-w-screen-sm md:max-w-screen-md lg:max-w-screen-md mt-10 ">
       <div className="flex gap-2 items-center mb-3 ">
         {author.profile && author.profile.imageUrl ? (
           <Image
@@ -126,15 +131,17 @@ const CommentCard = ({ commentData, blogId }: CommentCardProps) => {
           </div>
         </div>
       </div>
-
-      <div className="ml-12">
+      <div className="ml-8">
         {!isEditing ? (
-          <>
-            {/* <BiUpArrow size={20} className="m-0" /> */}
-            <div className="bg-stone-200 rounded-md py-4 px-3 text-sm   md:text-base font-medium m-0">
+          <div className="flex ">
+            <PiArrowBendUpLeftBold
+              size={25}
+              className="m-0  rotate-180 text-slate-600  font-extralight "
+            />
+            <div className="rounded-md py-4 px-3 text-sm  w-full  md:text-base font-medium m-0 bg-white border-2 border-slate-100">
               {content}
             </div>
-          </>
+          </div>
         ) : (
           <Form
             form={form}

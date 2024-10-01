@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -11,8 +11,7 @@ import HeadingBreadcrump from "@/components/heading-n-breadcrum";
 import { Button, Form, Input } from "antd";
 
 import { HomeOutlined } from "@ant-design/icons";
-import { MdCategory } from "react-icons/md";
-import { BiCategory, BiCategoryAlt } from "react-icons/bi";
+import { BiCategory } from "react-icons/bi";
 
 const CreateCategoryForm = () => {
   const { data: session } = useSession();
@@ -62,7 +61,7 @@ const CreateCategoryForm = () => {
   return (
     <div className="md:col-span-6 md:col-start-4 cols-span-8 col-start-2  col-end-12 ">
       <HeadingBreadcrump title="Create Category" items={items} />
-      <div className="border-2 shadow p-5 rounded-md px-[20px] py-[20px] lg:px-[50px] lg:py-[70px]  ">
+      <div className="border-2 border-stone-200/50 shadow-md shadow-stone-200/50 p-5 rounded-md px-[20px] py-[20px] lg:px-[50px] lg:py-[70px] backdrop-blur-sm bg-stone-50/40 ">
         <div className="flex flex-col justify-between mb-2">
           <h4 className=" md:text-lg md:font-medium flex gap-x-2 items-center">
             <BiCategory /> Category

@@ -21,8 +21,10 @@ const AuthorCard = ({
 }: AuthorCardProps) => {
   return (
     <div
-      className={`px-2 text-center md:text-start w-full  max-w-screen-sm   md:flex   overflow-hidden rounded-xl items-center space-x-2  ${
-        IsauthorPage ? "mx-auto border-2 border-primary p-3" : "shadow-md"
+      className={`px-2 text-center md:text-start w-full  max-w-screen-sm   md:flex   overflow-hidden rounded-xl items-center space-x-2 bg-stone-50/50 backdrop-blur-sm ${
+        IsauthorPage
+          ? "mx-auto border-2 border-stone-100 p-3"
+          : "shadow-md shadow-stone-200"
       }`}
     >
       {imageUrl ? (

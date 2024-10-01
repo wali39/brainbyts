@@ -46,8 +46,7 @@ const TitleForm = ({ title, authorId, blogId }: TitleFormProps) => {
 
   return (
     <div>
-
-      <div className="col-span-8 border-2 shadow-sm p-5  lg:h-40 items-center  rounded-md bg-[#EBEEE3]">
+      <div className="col-span-8 border-2  shadow-sm p-5  lg:h-40 items-center  rounded-md bg-stone-50/50 backdrop-blur-sm border-stone-200/45">
         <div className="flex justify-between mb-2">
           <h4 className=" md:text-lg md:font-medium flex gap-x-1 items-center">
             <MdTitle /> Title

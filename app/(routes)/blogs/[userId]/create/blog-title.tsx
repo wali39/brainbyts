@@ -1,6 +1,5 @@
 "use client";
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -60,7 +59,7 @@ const BlogTitle = () => {
   return (
     <div className="col-span-6 col-start-4 ">
       <HeadingBreadcrump title="Create blog" items={items} />
-      <div className="border-2 shadow p-5 rounded-md  py-[70px] px-[50px] ">
+      <div className="border-2 border-stone-200/40 shadow-md shadow-stone-200/30 p-5 rounded-md  py-[70px] px-[50px] bg-stone-50/50 backdrop-blur-sm ">
         <div className="flex flex-col justify-between mb-2">
           <h4 className=" md:text-lg md:font-medium flex gap-x-2 items-center">
             <MdTitle className="border-2 border-black rounded-sm" /> Blog title
@@ -81,7 +80,10 @@ const BlogTitle = () => {
             name="title"
             rules={[{ required: true, message: "Please input blog title!" }]}
           >
-            <Input size="large" placeholder="ex. Advanced machine learning..." />
+            <Input
+              size="large"
+              placeholder="ex. Advanced machine learning..."
+            />
           </Form.Item>
 
           <div className="flex justify-start items-center space-x-4 text-base mt-5 ">

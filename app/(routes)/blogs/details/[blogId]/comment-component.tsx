@@ -38,11 +38,18 @@ const CommentComponent = ({ id, comments }: CommentComponentProps) => {
       >
         <h1 className="text-2xl  font-medium mb-0">Comments </h1>
       </Divider>
-      <CommentCard commentData={commentData} blogId={id} />
-      {comments.length &&
+      {session && session.user && (
+        <CommentCard commentData={commentData} blogId={id} />
+      )}
+      {comments.length !== 0 ? (
         comments.map((comment) => (
           <CommentCard key={comment.id} commentData={comment} blogId={id} />
-        ))}
+        ))
+      ) : (
+        <div className="italic text-lg text-center mt-5 text-stone-300">
+          No comments for this blog{" "}
+        </div>
+      )}
     </div>
   );
 };

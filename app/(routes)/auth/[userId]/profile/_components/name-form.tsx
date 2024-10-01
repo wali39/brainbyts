@@ -42,7 +42,7 @@ const NameForm = ({ name }: NameformProps) => {
   };
 
   return (
-    <div className="border-2 shadow-sm p-5 rounded-md bg-[#EBEEE3]">
+    <div className="border-2 shadow-sm p-5 rounded-md bg-stone-50/50 backdrop-blur-sm border-stone-200/45">
       <div className="flex justify-between mb-2">
         <h4 className="md:text-lg font-medium flex gap-1 items-center">
           <FaRegUser size={16} /> Name
