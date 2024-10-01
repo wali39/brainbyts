@@ -54,7 +54,11 @@ export async function GET(req: Request) {
       })
     );
     // console.log("blogs from api", blogsCustomized);
-    const totalBlogs = await db.blog.count();
+    const totalBlogs = await db.blog.count({
+      where: {
+        isPublished: true,
+      },
+    });
     return NextResponse.json({ blogsByPage: blogsCustomized, totalBlogs });
   } catch (error) {
     console.log("[BLOG_GET_API]", error);
