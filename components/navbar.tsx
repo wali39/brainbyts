@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import logoDark from "@/public/logo_dark.png";
+import logoLight from "@/public/logo.png";
 
 import MobileMenu from "./mobile-menu";
 import UserMenu from "./user-menu";
@@ -18,6 +20,8 @@ import {
   MoonOutlined,
 } from "@ant-design/icons";
 import Search from "./search";
+import DarkModeToggle from "./dark-mode-toggle";
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -56,20 +60,16 @@ const Navbar = () => {
   }
   const pathName = usePathname();
   const [mobileMenu, setMobileMenu] = useState(true);
-  const [displayMode, setDisplayMode] = useState("light");
-
+  const { theme } = useTheme();
   const toggleMobileMenu = () => {
     setMobileMenu(!mobileMenu);
   };
-  const toggleMode = () => {
-    displayMode === "light" ? setDisplayMode("dark") : setDisplayMode("light");
-  };
 
   return (
-    <div className="p-5 pb-0 mb-0 text-black ">
+    <div className="p-5 pb-0 mb-0 text-black dark:text-white">
       <div className=" flex justify-between  items-center ">
         <Image
-          src="/logo.png"
+          src={theme == "light" ? logoLight : logoDark}
           height="30"
           width="150"
           alt="Brainbyts"
@@ -115,9 +115,7 @@ const Navbar = () => {
           <div className=" flex items-center md:space-x-2 lg:space-x-10">
             <Search />
             <UserMenu {...session?.user} />
-            <Button shape="circle" className="icon_button" onClick={toggleMode}>
-              {displayMode == "light" ? <MoonOutlined /> : <SunOutlined />}
-            </Button>
+            <DarkModeToggle />
           </div>
         </div>
       </div>

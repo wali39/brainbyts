@@ -105,11 +105,11 @@ const UserMenu = ({
               width={24}
               height={24}
               alt=""
-              className="rounded-full w-full h-full object-cover "
+              className="rounded-full w-full h-full object-cover dark:bg-white "
             />
           </div>
         ) : (
-          <div className="w-8 h-8 flex justify-center items-center">
+          <div className="w-8 h-8 flex justify-center items-center dark:text-white">
             <FaRegUser size={20} />
           </div>
         )}
