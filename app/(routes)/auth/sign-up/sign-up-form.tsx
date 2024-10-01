@@ -36,26 +36,25 @@ const SignUpForm = () => {
   return (
     <div className="col-start-2 col-span-10 md:col-start-4 md:col-span-6 rounded-xl shadow-xl p-5 md:p-[30px] border-2">
       <div className="text-center mx-auto mb-5  ">
-        <FaRegCircleUser size={50} className="text-accent mx-auto" />
+        <FaRegCircleUser
+          size={50}
+          className="text-accent mx-auto dark:text-stone-200"
+        />
 
-        <p className="text-3xl  capitalize mx-auto  text-center text-[#6ec58b]">
+        <p className="text-3xl  capitalize mx-auto  text-center text-[#6ec58b] dark:text-stone-200">
           SignUp
         </p>
       </div>
       <Form
-        // {...formItemLayout}
         form={form}
         name="register"
         onFinish={onFinish}
-        // initialValues={{remember:true}}
         disabled={isSubmitting}
         scrollToFirstError
         layout="vertical"
       >
         <Form.Item
           name="name"
-          //   label="Username"
-          //   tooltip="Required"
           rules={[
             {
               required: true,
@@ -105,22 +104,20 @@ const SignUpForm = () => {
           />
         </Form.Item>
 
-        <Form.Item
-        //  {...tailFormItemLayout}
-        >
+        <Form.Item>
           <Form.Item>
             <Button
               block
-              className={`${
+              className={`hover:bg-emerald-700 ${
                 isSubmitting
                   ? "bg-stone-200 text-stone-400 "
-                  : "bg-accent text-white"
+                  : "bg-accent text-white border-none"
               }`}
               htmlType="submit"
             >
               Register
             </Button>
-            <p className="mt-2 text-center text-sm ">
+            <p className="mt-2 text-center text-sm dark:text-stone-200 ">
               Already signedUp?{" "}
               <Link
                 href="/auth/sign-in"

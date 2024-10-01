@@ -22,21 +22,21 @@ const CreateCategoryForm = () => {
   };
 
   const onFinish = async (formData: formDatatype) => {
-    // try {
-    //   setIsSubmitting(true);
-    //   const response = await axios.post(
-    //     `/api/blogs/${session?.user.id}`,
-    //     formData
-    //   );
-    //   router.push(`/blogs/${session?.user.id}/${response.data.id}`);
-    //   router.refresh();
-    //   toast.success("Blog created!");
-    // } catch (error) {
-    //   console.log("BLOG_TITLE", error);
-    //   toast.error("something went wrong");
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+    try {
+      setIsSubmitting(true);
+      const response = await axios.post(
+        `/api/blogs/${session?.user.id}`,
+        formData
+      );
+      router.push(`/blogs/${session?.user.id}/${response.data.id}`);
+      router.refresh();
+      toast.success("Blog created!");
+    } catch (error) {
+      console.log("BLOG_TITLE", error);
+      toast.error("something went wrong");
+    } finally {
+      setIsSubmitting(false);
+    }
     console.log("Success:", formData);
   };
   const handleCancel = () => {
@@ -61,12 +61,12 @@ const CreateCategoryForm = () => {
   return (
     <div className="md:col-span-6 md:col-start-4 cols-span-8 col-start-2  col-end-12 ">
       <HeadingBreadcrump title="Create Category" items={items} />
-      <div className="border-2 border-stone-200/50 shadow-md shadow-stone-200/50 p-5 rounded-md px-[20px] py-[20px] lg:px-[50px] lg:py-[70px] backdrop-blur-sm bg-stone-50/40 ">
+      <div className="border-2 border-stone-200/50 shadow-md shadow-stone-200/50 p-5 rounded-md px-[20px] py-[20px] lg:px-[50px] lg:py-[70px] backdrop-blur-sm bg-card  ">
         <div className="flex flex-col justify-between mb-2">
           <h4 className=" md:text-lg md:font-medium flex gap-x-2 items-center">
             <BiCategory /> Category
           </h4>
-          <p className="text-gray-500 font-medium text-sm">
+          <p className="text-gray-500 dark:text-gray-300 font-medium text-sm">
             Blogs of different categories arrived add new catgory to more
             appropiate blog categorization
           </p>

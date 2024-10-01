@@ -59,12 +59,13 @@ const BlogTitle = () => {
   return (
     <div className="col-span-6 col-start-4 ">
       <HeadingBreadcrump title="Create blog" items={items} />
-      <div className="border-2 border-stone-200/40 shadow-md shadow-stone-200/30 p-5 rounded-md  py-[70px] px-[50px] bg-stone-50/50 backdrop-blur-sm ">
+      <div className="border-2 border-stone-200/40 shadow-md shadow-stone-200/30 p-5 rounded-md  py-[70px] px-[50px] bg-card backdrop-blur-sm ">
         <div className="flex flex-col justify-between mb-2">
           <h4 className=" md:text-lg md:font-medium flex gap-x-2 items-center">
-            <MdTitle className="border-2 border-black rounded-sm" /> Blog title
+            <MdTitle className="border-2 border-black dark:border-white rounded-sm" />{" "}
+            Blog title
           </h4>
-          <p className="text-gray-500 font-medium text-sm">
+          <p className="text-gray-500 dark:text-gray-300 font-medium text-sm">
             Choose a title for your blog Don't worry you can change it later
           </p>
         </div>

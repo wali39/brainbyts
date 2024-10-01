@@ -36,7 +36,9 @@ const CommentComponent = ({ id, comments }: CommentComponentProps) => {
         className="border-stone-300 border-t-8"
         orientationMargin={10}
       >
-        <h1 className="text-2xl  font-medium mb-0">Comments </h1>
+        <h1 className="text-2xl  font-medium mb-0 dark:text-white">
+          Comments{" "}
+        </h1>
       </Divider>
       {session && session.user && (
         <CommentCard commentData={commentData} blogId={id} />

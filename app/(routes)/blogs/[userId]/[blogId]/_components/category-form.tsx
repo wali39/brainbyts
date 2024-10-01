@@ -57,7 +57,7 @@ const CategoryForm = ({
   };
   return (
     <div>
-      <div className=" col-span-4 border-2 shadow-sm p-5 lg:h-[9.5rem] rounded-md bg-stone-50/50 backdrop-blur-sm border-stone-200/45">
+      <div className=" col-span-4 border-2 shadow-sm p-5 lg:h-[9.5rem] rounded-md bg-card backdrop-blur-sm border-stone-200/45">
         <div className="flex justify-between mb-2">
           <h4 className="md:text-lg font-medium flex items-center gap-x-1">
             <BiCategory />

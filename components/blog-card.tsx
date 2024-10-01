@@ -55,9 +55,9 @@ const BlogCard = ({ blogData }: BlogCardProps) => {
       transition={{ ease: "easeInOut", delay: 0.1, duration: 0.5 }}
     >
       <Link href={`/blogs/details/${id}`}>
-        <div className="bg-stone-50/50 p-4 rounded-lg cursor-pointer group relative  z-10 backdrop-blur-md shadow-md shadow-stone-100 border-[2.5px] border-stone-100 ">
+        <div className="bg-card p-4 rounded-lg cursor-pointer group relative  z-10 backdrop-blur-md shadow-md shadow-stone-100 border-[2.5px] border-stone-100 dark:drop-shadow-sm dark:border-none  ">
           <div className="relative">
-            <span className="absolute inline-block right-0 top-0 rounded-bl-md rounded-tr-md pl-[0.5rem] pb-[0.5rem] bg-stone-50 ">
+            <span className="absolute inline-block right-0 top-0 rounded-bl-md rounded-tr-md pl-[0.5rem] pb-[0.5rem] bg-card ">
               <Link href={`/blogs/category/${categoryId}`}>
                 <p className="px-[1rem] py-[0.5rem] inline-block rounded-[0.5rem] border-[2px] uppercase hover:bg-accent hover:text-white">
                   {category}
@@ -131,17 +131,17 @@ const BlogCard = ({ blogData }: BlogCardProps) => {
                 />
               </div>
             </div>
-            <div className="flex space-x-3 items-center font-medium text-md mt-5 px-2 text-slate-800">
+            <div className="flex space-x-3 items-center font-medium text-md mt-5 px-2 text-slate-800 dark:text-white">
               {authorImage ? (
                 <Image
-                  className="rounded-md w-8 h-8"
+                  className="rounded-md w-8 h-8 dark:bg-white"
                   height={200}
                   width={200}
                   src={authorImage}
                   alt=""
                 />
               ) : (
-                <div className="w-8 h-8 rounded">
+                <div className="w-8 h-8 rounded dark:bg-white">
                   <UserOutlined />
                 </div>
               )}
@@ -151,7 +151,7 @@ const BlogCard = ({ blogData }: BlogCardProps) => {
               >
                 <p>{authorName}</p>
               </Link>
-              <span className="w-2 h-2 bg-accent rounded-full" />
+              <span className="w-2 h-2 bg-accent rounded-full dark:bg-white" />
               <span>{readingTime(description || "").text}</span>
               {(session?.user?.id === authorId ||
                 session?.user?.role == "admin") && (
@@ -160,7 +160,7 @@ const BlogCard = ({ blogData }: BlogCardProps) => {
                 </Link>
               )}
             </div>
-            <ArrowRightOutlined className=" font-bold text-xl bg-accent  text-white rounded-full p-2 absolute right-5 bottom-5 -rotate-45  " />
+            <ArrowRightOutlined className=" font-bold text-xl bg-accent  text-white rounded-full p-2 absolute right-5 bottom-5 -rotate-45 dark:bg-white dark:text-black " />
           </div>
         </div>
       </Link>

@@ -46,7 +46,7 @@ const UserImageForm = ({ imageUrl }: UserImageFormProps) => {
     }
   };
   return (
-    <div className="border-2 shadow-sm p-5 rounded-md bg-stone-50/50 backdrop-blur-sm border-stone-200/45">
+    <div className="border-2 shadow-sm p-5 rounded-md bg-card backdrop-blur-sm border-stone-200/45 ">
       <div className="flex justify-between mb-2 align-middle">
         <h4 className="text-lg font-medium flex items-center gap-x-1">
           <MdOutlinePhotoSizeSelectActual />

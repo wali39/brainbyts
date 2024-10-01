@@ -8,10 +8,10 @@ interface HeadingBreadcrumpProps {
 }
 const HeadingBreadcrump = ({ title, items }: HeadingBreadcrumpProps) => {
   return (
-    <div className="text-center mb-[40px] mt-[100px]">
+    <div className="text-center mb-[40px] mt-[100px] dark:text-white ">
       <Heading title={title} marginFix />
       <Breadcrumb
-        className="flex justify-center font-bold"
+        className="flex justify-center font-bold  "
         separator="-"
         items={items}
       />
