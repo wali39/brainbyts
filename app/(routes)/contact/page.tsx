@@ -1,45 +1,30 @@
-import Heading from "@/components/heading";
-import BlogCard from "@/components/blog-card";
+import React from "react";
+import HeadingBreadcrump from "@/components/heading-n-breadcrum";
 
-import { Breadcrumb } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
-import getBlogs from "@/actions/get-blogs";
+import { MdOutlineEmail } from "react-icons/md";
 
-export default async function Contact() {
-  const blogs = await getBlogs({});
+export default function ContactPage() {
+  const items = [
+    {
+      href: "/",
+      title: (
+        <>
+          <HomeOutlined />,<span>Home</span>
+        </>
+      ),
+    },
+    { href: "/contact", title: <span>Contact</span> },
+  ];
   return (
-    <div>
-      <div className="text-center mt-[100px] ">
-        <p className="text-md">Showing posts from</p>
+    <div className="p-2">
+      <HeadingBreadcrump title="Contact" items={items} />
 
-        <Heading title="StartUp" marginFix />
-        <Breadcrumb
-          className="flex justify-center font-bold"
-          separator="-"
-          items={[
-            {
-              href: "/",
-              title: (
-                <>
-                  <HomeOutlined />,<span>Home</span>
-                </>
-              ),
-            },
-            {
-              href: "/",
-              title: <span>Categories</span>,
-            },
-            {
-              href: "/",
-              title: "Startup",
-            },
-          ]}
-        />
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-2  space-x-2">
-        {blogs.map((blog) => (
-          <BlogCard key={blog.id} blogData={blog} />
-        ))}
+      <div className="md:max-w-96 bg-card px-3 py-5 rounded-md border-2 border-stone-200/60 flex flex-col justify-center items-center mx-auto dark:border-none ">
+        <h1 className="font-thin text-3xl mb-3">Contact with us </h1>
+        <p className=" flex items-center gap-x-2 text-base">
+          <MdOutlineEmail /> wali190939@gmail.com
+        </p>
       </div>
     </div>
   );
