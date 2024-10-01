@@ -1,5 +1,5 @@
+import React from "react";
 import Profile from "./_components/profile";
-
 import { User, Profile as UserProfile } from "@/lib/types";
 
 import { getUser } from "@/actions/get-user";

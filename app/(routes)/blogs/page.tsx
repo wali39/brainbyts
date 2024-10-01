@@ -1,12 +1,10 @@
-import BlogCard from "@/components/blog-card";
-import { blogs } from "@/components/blog-seeds";
+import React from "react";
 import HeadingBreadcrump from "@/components/heading-n-breadcrum";
-import getBlogs from "@/actions/get-blogs";
+import Blogs from "./_components/blogs";
 
 import { HomeOutlined } from "@ant-design/icons";
 
-export default async function Blogs() {
-  const blogs = await getBlogs({});
+export default async function BlogsPage() {
   const items = [
     {
       href: "/",
@@ -21,11 +19,7 @@ export default async function Blogs() {
   return (
     <div>
       <HeadingBreadcrump title="All posts" items={items} />
-      <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-2  gap-x-10">
-        {blogs.map((blog) => (
-          <BlogCard key={blog.id} blogData={blog} />
-        ))}
-      </div>
+      <Blogs />
     </div>
   );
 }

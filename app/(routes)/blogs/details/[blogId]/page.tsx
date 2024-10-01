@@ -1,15 +1,12 @@
 import getBlog from "@/actions/get-blog";
 import BlogDetails from "@/components/blog-details";
-import CommentCard from "@/components/comment-card";
-import HeadingBreadcrump from "@/components/heading-n-breadcrum";
-
-import {
-  HomeOutlined,
-  PlusCircleOutlined,
-  PlusOutlined,
-} from "@ant-design/icons";
+import React from "react";
 import { redirect } from "next/navigation";
+
+import HeadingBreadcrump from "@/components/heading-n-breadcrum";
 import CommentComponent from "./comment-component";
+
+import { HomeOutlined } from "@ant-design/icons";
 
 export default async function BlogDetailsPage({
   params,
