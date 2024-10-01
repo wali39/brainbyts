@@ -14,9 +14,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
     exit: { opacity: 0, y: 0 },
   };
   const key = usePathname();
+
   return (
     <div>
-      <Provider session={""}>
         <AntdRegistry>
           <Navbar />
 
@@ -32,7 +32,6 @@ export default function Template({ children }: { children: React.ReactNode }) {
           </motion.div>
           <Toaster />
         </AntdRegistry>
-      </Provider>
     </div>
   );
 }
