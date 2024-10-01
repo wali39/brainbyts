@@ -1,11 +1,12 @@
 "use client";
 
 import Navbar from "@/components/navbar";
-import Provider from "@/context/provider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { ThemeProvider } from "next-themes";
+import Footer from "@/components/footer";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const variants = {
@@ -17,9 +18,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
   return (
     <div>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <AntdRegistry>
           <Navbar />
-
           <motion.div
             key={key}
             initial="hidden"
@@ -31,7 +32,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
             {children}
           </motion.div>
           <Toaster />
+          <Footer />
         </AntdRegistry>
+      </ThemeProvider>
     </div>
   );
 }
