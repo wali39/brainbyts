@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth";
 import Provider from "@/context/provider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ThemeProvider, useTheme } from "next-themes";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -23,8 +24,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession();
-
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       <body
