@@ -1,54 +1,56 @@
 import NextAuth, { getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import type { NextAuthOptions } from "next-auth";
 import { db } from "@/lib/db";
 import { compare } from "bcrypt";
 const cloudinary = require("cloudinary").v2;
 
-const handler = NextAuth({
+const providers = [
+  CredentialsProvider({
+    credentials: {
+      email: {},
+      password: {},
+    },
+    async authorize(credentials: any, req): Promise<any> {
+      const { email, password } = credentials as Record<
+        "email" | "password",
+        string
+      >;
+
+      const user = await db.user.findFirst({
+        where: {
+          email,
+        },
+        include: {
+          profile: true,
+        },
+      });
+      if (user) {
+        const IsPassMatch = await compare(password, user.password);
+        if (IsPassMatch) {
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            imageUrl: user.profile?.imageUrl,
+          };
+          // return NextResponse.json({ user: IsUser }, { status: 200 });
+        }
+
+        // return NextResponse.json({ error: "Wrong password!" }, { status: 200 });
+      }
+
+      return null;
+    },
+  }),
+];
+export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
   pages: {
     signIn: "/auth/sign-in",
   },
-  providers: [
-    CredentialsProvider({
-      credentials: {
-        email: {},
-        password: {},
-      },
-      async authorize(credentials: any, req): Promise<any> {
-        const { email, password } = credentials as Record<
-          "email" | "password",
-          string
-        >;
-
-        const user = await db.user.findFirst({
-          where: {
-            email,
-          },
-          include: {
-            profile: true,
-          },
-        });
-        if (user) {
-          const IsPassMatch = await compare(password, user.password);
-          if (IsPassMatch) {
-            return {
-              id: user.id,
-              name: user.name,
-              email: user.email,
-              role: user.role,
-              imageUrl: user.profile?.imageUrl,
-            };
-            // return NextResponse.json({ user: IsUser }, { status: 200 });
-          }
-
-          // return NextResponse.json({ error: "Wrong password!" }, { status: 200 });
-        }
-
-        return null;
-      },
-    }),
-  ],
+  providers: providers,
   callbacks: {
     jwt: async ({ token, user, session, trigger }) => {
       if (trigger === "update") {
@@ -179,5 +181,7 @@ const handler = NextAuth({
       return session;
     },
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
